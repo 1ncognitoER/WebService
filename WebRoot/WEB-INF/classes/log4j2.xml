@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    status : 指定log4j本身的打印日志的级别
+             all< trace < debug < info < warn < error < fatal < off
+    monitorInterval : 用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s.
+-->
+<configuration status="debug" monitorInterval="30">
+
+    <!-- Property定义 -->
+    <Properties>
+        <Property name="LOG_PATH">E:/IdeaProjects/WebService/WebRoot/log/</Property>
+        <Property name="DEBUG_PATH">debug/</Property>
+        <Property name="INFO_PATH">info/</Property>
+        <Property name="WARN_PATH">warn/</Property>
+        <Property name="ERROR_PATH">error/</Property>
+        <Property name="DEBUG_LOG_NAME">debug.log</Property>
+        <Property name="INFO_LOG_NAME">info.log</Property>
+        <Property name="WARN_LOG_NAME">warn.log</Property>
+        <Property name="ERROR_LOG_NAME">error.log</Property>
+        <property name="LOG_PATTERN">[%p] %d{yyyy-MM-dd HH\:mm\:ss} method:%l%n%m%n</property>
+        <!--<property name="ARCHIVE_PATTERN">${date:yyyy-MM-dd}/%d{HH-mm-ss-SSS}-%i.log.gz</property>-->
+        <property name="ARCHIVE_PATTERN">%d{yyyy-MM-dd}-%i.log.gz</property>
+    </Properties>
+
+    <!-- appender 定义 -->
+    <appenders>
+        <!--控制台输出配置-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--
+                输出日志级别设置
+                onMatch="ACCEPT" 表示匹配该级别及以上
+                onMatch="DENY" 表示不匹配该级别及以上
+                onMatch="NEUTRAL" 表示该级别及以上的，由下一个filter处理，如果当前是最后一个，则表示匹配该级别及以上
+                onMismatch="ACCEPT" 表示匹配该级别以下
+                onMismatch="NEUTRAL" 表示该级别及以下的，由下一个filter处理，如果当前是最后一个，则不匹配该级别以下的
+                onMismatch="DENY" 表示不匹配该级别以下的
+            -->
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 日志文本输出格式 -->
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!--
+            日志输出 方式一
+        -->
+        <!-- append 为 true 表示消息增加到指定文件中，false 表示消息覆盖指定的文件内容，默认值是 true -->
+        <File name="LogFile" fileName="${LOG_PATH}startlog.log" append="true">
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </File>
+
+        <!--
+            日志输出 方式二
+        -->
+        <!-- debug 日志 -->
+        <!--
+            fileName：输出文件
+            filePattern：压缩文件,此处表示按年份-月份建立
+         -->
+        <RollingFile name="DebugRollingFile" fileName="${LOG_PATH}${DEBUG_LOG_NAME}"
+                     filePattern="${LOG_PATH}${DEBUG_PATH}${ARCHIVE_PATTERN}">
+            <!-- 只输出debug级别 -->
+            <Filters>
+                <ThresholdFilter level="debug" onMatch="NEUTRAL" onMismatch="DENY"/>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="ACCEPT"/>
+            </Filters>
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <!-- 最多保留文件数 -->
+            <DefaultRolloverStrategy max="20" />
+            <Policies>
+                <!--
+                    基于时间的滚动策略,控制日志文件大小
+                        关键点在于RollingFile中filePattern属性后的日期格式，以及TimeBasedTriggeringPolicy中interval
+                        的滚动周期
+                        日期格式精确到哪一位，interval也精确到哪一个单位
+
+                    interval:指定多久滚动一次，默认是 1 小时
+                    modulate = true 用来调整时间.
+                        比如现在是早上3am，interval是4，那么第一次滚动是在4am，接着是8am，12am...而不是7am.
+                -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!--
+                    基于指定文件大小的滚动策略，size属性用来定义每个日志文件的大小
+                        日志大小超过size，则该日志会自动存入定义（filePattern参数）的文件夹下面并进行压缩，作为存档
+                -->
+                <!--<SizeBasedTriggeringPolicy size="10KB" />-->
+            </Policies>
+        </RollingFile>
+
+        <!-- info 日志 -->
+        <RollingFile name="InfoRollingFile" fileName="${LOG_PATH}${INFO_LOG_NAME}"
+                     filePattern="${LOG_PATH}${INFO_PATH}${ARCHIVE_PATTERN}">
+            <Filters>
+                <ThresholdFilter level="info" onMatch="NEUTRAL" onMismatch="DENY" />
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="ACCEPT" />
+            </Filters>
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <DefaultRolloverStrategy max="20" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!--<SizeBasedTriggeringPolicy size="10KB" />-->
+            </Policies>
+        </RollingFile>
+
+        <!-- warn 日志 -->
+        <RollingFile name="WarnRollingFile" fileName="${LOG_PATH}${WARN_LOG_NAME}"
+                     filePattern="${LOG_PATH}${WARN_PATH}${ARCHIVE_PATTERN}">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="NEUTRAL" onMismatch="DENY" />
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="ACCEPT" />
+            </Filters>
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <DefaultRolloverStrategy max="20" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!--<SizeBasedTriggeringPolicy size="10KB" />-->
+            </Policies>
+        </RollingFile>
+
+        <!-- error 日志 -->
+        <RollingFile name="ErrorRollingFile" fileName="${LOG_PATH}${ERROR_LOG_NAME}"
+                     filePattern="${LOG_PATH}${ERROR_PATH}${ARCHIVE_PATTERN}">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="NEUTRAL" onMismatch="DENY" />
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="ACCEPT" />
+            </Filters>
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <DefaultRolloverStrategy max="20" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <!--<SizeBasedTriggeringPolicy size="10KB" />-->
+            </Policies>
+        </RollingFile>
+
+    </appenders>
+
+    <!--
+        loggers定义
+            只有定义了logger并引入的appender，appender才会生效
+    -->
+    <loggers>
+        <!--过滤掉spring和mybatis的一些无用的信息-->
+        <logger name="org.springframework" level="info"></logger>
+        <logger name="org.mybatis" level="info"></logger>
+        <!-- 配置日志的根节点 -->
+        <Root level="debug">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="LogFile" />
+            <AppenderRef ref="DebugRollingFile" />
+            <AppenderRef ref="InfoRollingFile" />
+            <AppenderRef ref="WarnRollingFile" />
+            <AppenderRef ref="ErrorRollingFile" />
+        </Root>
+    </loggers>
+
+</configuration>
