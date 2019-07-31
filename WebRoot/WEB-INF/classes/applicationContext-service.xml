@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <!-- 扫描 serviceImpl 使用的注解 注入bean -->
-    <context:component-scan base-package="com.hzzf.*.serviceImpl" />
+    <context:component-scan base-package="com.czy.*.serviceImpl" />
 
     <!-- 引入服务端点接口(SEI)配置文件 -->
     <import resource="classpath:sei/*/*.xml" />

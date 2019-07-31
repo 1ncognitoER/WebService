@@ -5,6 +5,6 @@
 <configuration>
     <!-- 重命名 -->
     <typeAliases>
-        <typeAlias alias="Test" type="com.hzzf.test.entity.Test"/>
+        <typeAlias alias="Test" type="com.czy.test.entity.Test"/>
     </typeAliases>
 </configuration>

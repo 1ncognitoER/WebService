@@ -1,4 +1,4 @@
-package com.hzzf.test.entity;
+package com.czy.test.entity;
 
 public class Test {
     public int testId;

@@ -38,7 +38,7 @@
             -->
             <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
             <!-- 日志文本输出格式 -->
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <PatternLayout pattern="${LOG_PATTERN}" charset="GBK" />
         </Console>
 
         <!--
@@ -47,7 +47,7 @@
         <!-- append 为 true 表示消息增加到指定文件中，false 表示消息覆盖指定的文件内容，默认值是 true -->
         <File name="LogFile" fileName="${LOG_PATH}startlog.log" append="true">
             <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8" />
         </File>
 
         <!--
@@ -65,7 +65,7 @@
                 <ThresholdFilter level="debug" onMatch="NEUTRAL" onMismatch="DENY"/>
                 <ThresholdFilter level="info" onMatch="DENY" onMismatch="ACCEPT"/>
             </Filters>
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8" />
             <!-- 最多保留文件数 -->
             <DefaultRolloverStrategy max="20" />
             <Policies>
@@ -95,7 +95,7 @@
                 <ThresholdFilter level="info" onMatch="NEUTRAL" onMismatch="DENY" />
                 <ThresholdFilter level="warn" onMatch="DENY" onMismatch="ACCEPT" />
             </Filters>
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8" />
             <DefaultRolloverStrategy max="20" />
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
@@ -110,7 +110,7 @@
                 <ThresholdFilter level="warn" onMatch="NEUTRAL" onMismatch="DENY" />
                 <ThresholdFilter level="error" onMatch="DENY" onMismatch="ACCEPT" />
             </Filters>
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8" />
             <DefaultRolloverStrategy max="20" />
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
@@ -125,7 +125,7 @@
                 <ThresholdFilter level="error" onMatch="NEUTRAL" onMismatch="DENY" />
                 <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="ACCEPT" />
             </Filters>
-            <PatternLayout pattern="${LOG_PATTERN}" />
+            <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8" />
             <DefaultRolloverStrategy max="20" />
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />

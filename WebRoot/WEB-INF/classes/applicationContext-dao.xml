@@ -32,6 +32,15 @@
         <property name="minIdle" value="${jdbc.minIdle}"></property>
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="${jdbc.maxWait}"></property>
+
+        <!-- 心跳检查 -->
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}"></property>
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}"></property>
+        <property name="testOnReturn" value="${jdbc.testOnReturn}"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"></property>
+        <property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}"></property>
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"></property>
+        <property name="validationQuery" value="SELECT 1 FROM DUAL"/>
     </bean>
 
     <!-- 注入 SqlSessionFactory 对象 -->
@@ -50,7 +59,7 @@
         <!-- 当存在且仅存一个数据源配置 可以默认不写 -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 指明映射器接口位置 -->
-        <property name="basePackage" value="com.hzzf.*.dao"/>
+        <property name="basePackage" value="com.czy.*.dao"/>
     </bean>
 
     <!-- 配置事务管理器 -->
@@ -81,7 +90,7 @@
     <!-- 配置织入 -->
     <aop:config>
         <!-- 配置切点表达式 -->
-        <aop:pointcut id="pointcut" expression="execution(* com.hzzf.*.serviceImpl.*.*(..))" />
+        <aop:pointcut id="pointcut" expression="execution(* com.czy.*.serviceImpl.*.*(..))" />
         <!--
             配置切面:切点+通知
             pointcut-ref：切点名称

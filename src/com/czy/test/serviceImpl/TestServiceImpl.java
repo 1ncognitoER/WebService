@@ -1,10 +1,10 @@
-package com.hzzf.test.serviceImpl;
+package com.czy.test.serviceImpl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hzzf.test.dao.TestDao;
-import com.hzzf.test.entity.Test;
-import com.hzzf.test.service.TestService;
+import com.czy.test.dao.TestDao;
+import com.czy.test.entity.Test;
+import com.czy.test.service.TestService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,9 @@ import javax.jws.WebService;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebService(endpointInterface = "com.hzzf.test.service.TestService",
+@WebService(endpointInterface = "com.czy.test.service.TestService",
         serviceName = "testService",
-        targetNamespace = "http://service.test.hzzf.com/")
+        targetNamespace = "http://service.test.czy.com/")
 public class TestServiceImpl implements TestService {
 
     // 日志

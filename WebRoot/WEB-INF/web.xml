@@ -24,7 +24,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CXFServlet</servlet-name>
-        <url-pattern>/gczf/*</url-pattern>
+        <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
 
     <!-- log4j2 -->

@@ -1,6 +1,6 @@
-package com.hzzf.test.dao;
+package com.czy.test.dao;
 
-import com.hzzf.test.entity.Test;
+import com.czy.test.entity.Test;
 
 import java.util.Map;
 

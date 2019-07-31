@@ -1,4 +1,4 @@
-package com.hzzf.util;
+package com.czy.util;
 
 /*import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -32,9 +32,9 @@ public class TestMethodByAxis {
      */
     public static void main (String[] args) {
         // 指出service所在完整的URL,http://ip:端口号/项目名/webservice/sei(即webservice接口名)?wsdl
-        String endpoint = "http://localhost:9099/gczf/testService?wsdl";
+        String endpoint = "http://localhost:9099/service/testService?wsdl";
         // 调用接口的targetNamespace,webservice接口所在的包名，逆序，一直到src下
-        String targetNamespace = "http://service.test.hzzf.com/";
+        String targetNamespace = "http://service.test.czy.com/";
         // 所调用接口的方法method
         String method = "getTestInfo";
         // 创建一个服务(service)调用(call)
@@ -82,9 +82,9 @@ public class TestMethodByAxis {
     /*public static void main (String[] args) {
         try {
             // 指出service所在完整的URL,http://ip:端口号/项目名/webservice/sei(即webservice接口名)?wsdl
-            String endpoint = "http://localhost:9099/gczf/testService?wsdl";
+            String endpoint = "http://localhost:9099/service/testService?wsdl";
             // 调用接口的targetNamespace,webservice接口所在的包名，逆序，一直到src下
-            String targetNamespace = "http://service.test.hzzf.com/";
+            String targetNamespace = "http://service.test.czy.com/";
             // 所调用接口的方法method
             String method = "getTestInfo";
 

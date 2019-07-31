@@ -1,4 +1,4 @@
-package com.hzzf.util;
+package com.czy.util;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -8,18 +8,6 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
-import org.apache.axis2.rpc.client.RPCServiceClient;
-
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import org.apache.axis.encoding.XMLType;
-
-import javax.xml.namespace.QName;
-import javax.xml.rpc.ParameterMode;
-import javax.xml.rpc.ServiceException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.rmi.RemoteException;
 
 public class TestMethodByAxis2 {
     /**
@@ -33,9 +21,9 @@ public class TestMethodByAxis2 {
     public static void main (String[] args) {
         try {
             // 创建服务地址WebService的URL,注意不是WSDL的URL
-            String url = "http://localhost:9090/gczf/testService?wsdl";
+            String url = "http://localhost:9090/service/testService?wsdl";
             // 调用接口的targetNamespace,webservice接口所在的包名，逆序，一直到src下
-            String targetNamespace = "http://service.test.hzzf.com/";
+            String targetNamespace = "http://service.test.czy.com/";
             // 所调用接口的方法method
             String methodName = "getTestInfo";
 
@@ -87,9 +75,9 @@ public class TestMethodByAxis2 {
     /*public static void main (String[] args) {
         try {
             // 指出service所在完整的URL,http://ip:端口号/项目名/webservice/sei(即webservice接口名)?wsdl
-            String endpoint = "http://localhost:9099/gczf/testService?wsdl";
+            String endpoint = "http://localhost:9099/service/testService?wsdl";
             // 调用接口的targetNamespace,webservice接口所在的包名，逆序，一直到src下
-            String targetNamespace = "http://service.test.hzzf.com/";
+            String targetNamespace = "http://service.test.czy.com/";
             // 所调用接口的方法method
             String method = "getTestInfo";
 
